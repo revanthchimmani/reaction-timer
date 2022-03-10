@@ -1,18 +1,24 @@
 <template>
   <h1>Reaction Timer Game</h1>
   <button @click="startTimer" :disabled="isPlaying">Play</button>
-  <p v-if="userReactionScore && !isPlaying">
+  <!-- <p v-if="userReactionScore && !isPlaying">
     Reaction time : {{ userReactionScore }}ms
-  </p>
+  </p> -->
+
   <Block v-if="isPlaying" :delay="delay" @userTime="userReactionTime" />
+  <Results
+    v-if="userReactionScore && !isPlaying"
+    :userReactionScore="userReactionScore"
+  />
 </template>
 
 <script>
 import Block from "./components/Block.vue";
+import Results from "./components/Results.vue";
 
 export default {
   name: "App",
-  components: { Block },
+  components: { Block, Results },
   data() {
     return {
       isPlaying: false,
